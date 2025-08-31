@@ -62,7 +62,7 @@
     @keyframes particle-float{ to{ transform:translateY(-100vh); } }
 
     .container{ width:90%; max-width:1200px; margin:0 auto; }
-    section{ padding:80px 0; position:relative; z-index:1; }
+    section{ padding:80px 0; position:relative; z-index:1; scroll-margin-top:100px; }
 
     .section-title{
       font-family:'Montserrat',sans-serif; font-size:2.2rem; font-weight:700; text-align:center; margin-bottom:40px; position:relative; color:var(--secondary);
@@ -96,24 +96,33 @@
     .theme-toggle:hover{ transform:rotate(30deg); }
 
     /* Hero */
-    .hero{ height:100vh; display:flex; align-items:center; position:relative; overflow:hidden; padding-top:80px; }
+    .hero{ height:auto; min-height:100vh; display:flex; align-items:center; position:relative; overflow:hidden; padding-top:120px; }
     .hero-content{ max-width:600px; z-index:2; }
     .hero h1{ font-family:'Montserrat',sans-serif; font-size:3rem; font-weight:800; line-height:1.2; margin-bottom:20px; color:var(--secondary); }
     .hero h1 span{ color:var(--primary); position:relative; }
     .hero h1 span::after{ content:''; position:absolute; bottom:-5px; left:0; width:100%; height:4px; background:var(--primary); border-radius:2px; }
     .hero p{ font-size:1.2rem; margin-bottom:30px; color:var(--text-light); }
-    .hero-btns{ display:flex; gap:15px; }
+    .hero-btns{ display:flex; gap:15px; flex-wrap:wrap; }
     .hero-img-container{
       position:absolute; right:10%; top:55%; transform:translateY(-50%); width:35%; max-width:350px; height:60%; max-height:450px; border-radius:15px; overflow:hidden; box-shadow:0 20px 40px rgba(0,0,0,.2); border:4px solid var(--primary);
     }
     .hero-img-container img{ width:100%; height:100%; object-fit:cover; transition:transform .5s ease; }
     .hero-img-container:hover img{ transform:scale(1.05); }
 
-    .social-icons{ display:flex; gap:15px; margin-top:30px; }
+    .social-icons{ display:flex; gap:15px; margin-top:30px; flex-wrap:wrap; }
     .social-icons a{
       display:flex; align-items:center; justify-content:center; width:50px; height:50px; background:rgba(74,107,255,.1); color:var(--primary); border-radius:50%; font-size:1.5rem; border:1px solid rgba(74,107,255,.2);
     }
     .social-icons a:hover{ background:var(--primary); color:#fff; transform:translateY(-5px); }
+
+    /* NEW: Resume button style to replace icon */
+    .social-icons .resume-btn{
+      width:auto; height:auto; padding:10px 18px; border-radius:28px; font-size:1rem; border:2px solid var(--primary);
+      background:var(--primary); color:#fff; font-weight:600; letter-spacing:.2px;
+    }
+    .social-icons .resume-btn:hover{
+      background:transparent; color:var(--primary); transform:translateY(-3px); box-shadow:0 10px 20px rgba(74,107,255,.2);
+    }
 
     /* Tech grid */
     .technologies{ background:var(--light); padding:60px 0; }
@@ -217,23 +226,18 @@
       .projects-grid{ grid-template-columns:1fr; gap:20px; }
       .project-card{ max-width:100%; }
 
-      /* CHANGED: increase hero top padding on small screens to avoid header overlap */
-      .hero{ padding-top:110px; }
+      /* INCREASED to avoid header overlap on small screens */
+      .hero{ padding-top:150px; }
     }
     @media (max-width:480px){
       .project-info{ padding:20px 15px; }
       .project-info h3{ font-size:1.4rem; }
       .project-img-container{ height:200px; }
     }
-
-    /* Optional small helper: make resume download icon visually match other social icons */
-    .social-icons .resume-download{
-      display:flex; align-items:center; justify-content:center; width:50px; height:50px; background:rgba(74,107,255,.1); color:var(--primary); border-radius:50%; font-size:1.2rem; border:1px solid rgba(74,107,255,.2); text-decoration:none;
-    }
-    .social-icons .resume-download:hover{ background:var(--primary); color:#fff; transform:translateY(-5px); }
   </style>
 </head>
-<body>
+<!-- Default DARK MODE enabled by adding class here -->
+<body class="dark-mode">
   <!-- Background glow -->
   <div class="bg-elements">
     <div class="bg-element"></div>
@@ -256,7 +260,7 @@
           <li role="none"><a role="menuitem" href="#contact">Contact</a></li>
           <li role="none">
             <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
-              <i class="fas fa-moon" aria-hidden="true"></i>
+              <i class="fas fa-sun" aria-hidden="true"></i>
             </button>
           </li>
         </ul>
@@ -275,13 +279,14 @@
           <a href="#projects" class="btn">View My Work</a>
           <a href="#contact" class="btn btn-outline">Contact Me</a>
         </div>
+
+        <!-- Social + Resume Button -->
         <div class="social-icons" aria-label="Social links">
           <a href="https://www.linkedin.com/in/naveen-r-9070a9284/" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
           <a href="https://github.com/naveen2k05-2k05" aria-label="GitHub"><i class="fab fa-github"></i></a>
           <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
-
-          <!-- CHANGED: added downloadable resume button next to social icons -->
-          <a class="resume-download" href="Naveen_Resume.pdf" download aria-label="Download Resume"><i class="fas fa-download"></i></a>
+          <!-- CHANGED: icon replaced with TEXT BUTTON -->
+          <a class="resume-btn" href="Naveen_Resume.pdf" download aria-label="Download Resume">Download Resume</a>
         </div>
       </div>
       <div class="hero-img-container" aria-hidden="true">
@@ -333,7 +338,7 @@
       <div class="projects-grid">
         <div class="project-card">
           <div class="project-img-container">
-            <img src="web_des_fig2.png" alt="E-Commerce Website preview"/>
+            <img src="web_des_fig2.png" alt="E-Commerce Website preview" loading="lazy"/>
           </div>
           <div class="project-info">
             <h3>E-Commerce Website</h3>
@@ -349,7 +354,7 @@
 
         <div class="project-card">
           <div class="project-img-container">
-            <img src="asst_fig1.png" alt="Asset Management System screenshot"/>
+            <img src="asst_fig1.png" alt="Asset Management System screenshot" loading="lazy"/>
           </div>
           <div class="project-info">
             <h3>Asset Management System</h3>
@@ -365,7 +370,7 @@
 
         <div class="project-card">
           <div class="project-img-container">
-            <img src="port_fig1.png" alt="Portfolio Website screenshot"/>
+            <img src="port_fig1.png" alt="Portfolio Website screenshot" loading="lazy"/>
           </div>
           <div class="project-info">
             <h3>Portfolio Website</h3>
@@ -425,7 +430,7 @@
         </div>
 
         <div class="contact-form">
-          <!-- CHANGED: added action to point to Formspree and method POST -->
+          <!-- Formspree POST -->
           <form id="contactForm" action="https://formspree.io/f/mvgqndbv" method="POST" novalidate>
             <!-- Honeypot (spam protection) -->
             <input type="text" name="_gotcha" id="hp_field" style="display:none;" tabindex="-1" autocomplete="off"/>
@@ -465,8 +470,7 @@
     /* =============================
        Config (Formspree)
        ============================= */
-    // CHANGED: set actual Formspree form ID
-    const FORMSPREE_FORM_ID = "mvgqndbv"; // e.g., "xyzabcd"
+    const FORMSPREE_FORM_ID = "mvgqndbv";
     const FORMSPREE_ENDPOINT = `https://formspree.io/f/${FORMSPREE_FORM_ID}`;
 
     /* Header scroll effect */
@@ -483,29 +487,42 @@
       link.addEventListener('click', () => navLinks.classList.remove('active'));
     });
 
-    /* Smooth scrolling for anchor links */
+    /* Smooth scrolling for anchor links with header offset */
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
       anchor.addEventListener('click', function(e){
         const target = document.querySelector(this.getAttribute('href'));
         if (target){
           e.preventDefault();
-          window.scrollTo({ top: target.offsetTop - 80, behavior: 'smooth' });
+          const headerOffset = 90;
+          const elementPosition = target.getBoundingClientRect().top + window.pageYOffset;
+          const offsetPosition = elementPosition - headerOffset;
+          window.scrollTo({ top: offsetPosition, behavior: 'smooth' });
         }
       });
     });
 
-    /* Dark/Light Mode */
+    /* Dark/Light Mode (default: dark) */
     const themeToggle = document.getElementById('themeToggle');
     const body = document.body;
     const icon = themeToggle.querySelector('i');
     const currentTheme = localStorage.getItem('theme');
-    if (currentTheme){
+
+    // Apply stored theme if any; otherwise keep default dark-mode already set on body.
+    if (currentTheme) {
+      body.classList.remove('dark-mode','light-mode'); // reset
       body.classList.add(currentTheme);
       if (currentTheme === 'dark-mode'){ icon.classList.replace('fa-moon','fa-sun'); }
+      else { icon.classList.replace('fa-sun','fa-moon'); }
+    } else {
+      // Persist default dark mode
+      localStorage.setItem('theme','dark-mode');
+      icon.classList.replace('fa-moon','fa-sun');
     }
+
     themeToggle.addEventListener('click', () => {
       body.classList.toggle('dark-mode');
-      if (body.classList.contains('dark-mode')){
+      const isDark = body.classList.contains('dark-mode');
+      if (isDark){
         icon.classList.replace('fa-moon','fa-sun'); localStorage.setItem('theme','dark-mode');
       } else {
         icon.classList.replace('fa-sun','fa-moon'); localStorage.setItem('theme','light-mode');
@@ -552,7 +569,7 @@
       animated.forEach(el => observer.observe(el));
     }
 
-    /* Contact form submission via Formspree */
+    /* Contact form submission via Formspree (single handler) */
     const contactForm = document.getElementById('contactForm');
     const statusEl = document.getElementById('formStatus');
     const submitBtn = document.getElementById('submitBtn');
@@ -618,37 +635,6 @@
       createParticles();
       setupInViewAnimations();
     });
-
-  // Contact Form Submission with Formspree
-  // CHANGED: use the correct form ID and status element IDs to match the page
-  const form = document.getElementById("contactForm");
-  const status = document.getElementById("formStatus");
-
-  form.addEventListener("submit", async (e) => {
-    e.preventDefault();
-    const data = new FormData(form);
-
-    try {
-      const response = await fetch(form.action, {
-        method: form.method,
-        body: data,
-        headers: { 'Accept': 'application/json' }
-      });
-
-      if (response.ok) {
-        status.style.color = "lightgreen";
-        status.textContent = "✅ Message sent successfully!";
-        form.reset();
-      } else {
-        status.style.color = "red";
-        status.textContent = "❌ Oops! Something went wrong. Please try again.";
-      }
-    } catch (error) {
-      status.style.color = "orange";
-      status.textContent = "⚠️ Network error. Please try again later.";
-    }
-  });
-
   </script>
 </body>
 </html>
